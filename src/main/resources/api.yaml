@@ -1,0 +1,40 @@
+openapi: 3.0.1
+info:
+  title: ""
+  description: apt
+  version: 1.0.0
+servers:
+  - url: http://localhost/hello
+tags:
+  - name: hello-controller
+    description: HelloContoller
+paths:
+  /v1/hello:
+    get:
+      tags:
+        - hello-controller
+      summary: getHello
+      operationId: hello
+      responses:
+        "200":
+          description: Ok
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Hello'
+      security:
+        - basicAuth: []  # <-- use the same name here
+
+components:
+  schemas:
+    Hello:
+      type: object
+      properties:
+        message:
+          type: string
+
+  securitySchemes:
+    basicAuth:     # <-- arbitrary name for the security scheme
+      type: http
+      scheme: basic
+x-original-swagger-version: "2.0"
